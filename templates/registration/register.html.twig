@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+ 
+
+    <div class='container'>
+    
+
+        <div class="row  mt-5">
+            <div class="col-2"></div>
+            <div class="col-6">
+                {% for flashError in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                {% endfor %}
+                {% for message in app.flashes ('notice') %}
+                <div class ="alert alert-success" role="alert"> 
+                  {{ message }}
+                  </div>
+                  {% endfor %}
+            <img src="{{ absolute_url(asset('/Images/sing.png'))}}" width="40%" class="rounded mx-auto d-block" alt="...">
+
+                {{ form_start(registrationForm) }}
+                
+
+                {{ form_row(registrationForm.username) }}
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Password'
+                }) }}
+                
+                {{ form_row(registrationForm.agreeTerms) }}
+                <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success" type="button">Valider</button>
+                </div>
+                {{ form_end(registrationForm) }}
+            </div>
+            <div class="col-3"></div>
+        </div>
+ </div>
+{% endblock %}

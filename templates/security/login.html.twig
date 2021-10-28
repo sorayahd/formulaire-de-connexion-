@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<div class='container'>
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <div class='container'>
+    
+
+
+
+
+        <div class="row  mt-5">
+            <div class="col-2"></div>
+            <div class="col-6">
+                {% for flashError in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                {% endfor %}
+            <img src="{{ absolute_url(asset('/Images/login3.png'))}}" width="40%" class="rounded mx-auto d-block" alt="...">
+
+
+
+  
+
+     <label for="inputUsername">Identifiant</label>        
+      <input type="text"  name="username" id="inputUsername" 
+      placeholder ="saisir votre identifiant" class="form-control" autocomplete="username" required >
+
+
+     <label for="inputPassword">Mot de passe </label>
+    <input type="password" name="password" id="inputPassword" 
+    placeholder ="saisir votre mot de passe " class="form-control" autocomplete="current-password" required>
+
+
+
+     <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}">
+
+
+
+                <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success mt-2" type="button">Valider</button>
+                <a href="{{ path('app_register') }}" class="btn btn-success mt-2" type="button">Ajouter un compte</a>
+                  <button type="reset" class="btn btn-success mt-2" type="button">Reset</button></div>
+              
+
+
+            </div>
+            
+            <div class="col-3"></div>
+        </div>
+ </div>
+   
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+
+</form>
+
+
+
+
+{% endblock %}
+ 
